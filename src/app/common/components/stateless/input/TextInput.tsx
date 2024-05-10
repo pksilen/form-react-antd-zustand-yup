@@ -2,13 +2,13 @@ import ExclamationCircleOutlined from '@ant-design/icons/ExclamationCircleOutlin
 import { Input } from 'antd';
 import React from 'react';
 
-export type TextInputProps = {
+export type TextInputProps = Readonly<{
   className?: string;
   error?: string | null;
   label?: string;
   maxLength?: number;
   required?: boolean;
-};
+}>;
 
 export const TextInput = React.forwardRef(
   ({ className, error, label, maxLength, required, ...restOfProps }: TextInputProps, ref) => (
