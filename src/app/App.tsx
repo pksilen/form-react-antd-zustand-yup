@@ -1,7 +1,7 @@
 import { ConfigProvider, theme } from 'antd';
 import classNames from './App.module.scss';
 import { UserList } from './components/userlist/UserList';
-import { UserRegistration } from './components/userregistration/UserRegistration';
+import { UserRegistrationForm } from './components/userregistrationform/UserRegistrationForm';
 
 export default function App() {
   return (
@@ -11,7 +11,7 @@ export default function App() {
       }}
     >
       <main className={classNames.main}>
-        <UserRegistration />
+        <UserRegistrationForm />
         <div className={classNames.verticalDivider}></div>
         <UserList />
       </main>
