@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { User } from './testdata/User';
 import { fakeUser } from './testdata/fakeUser';
 import { camelCaseIdentifierToWords } from './utils/camelCaseIdentifierToWords';
@@ -18,7 +18,7 @@ export default class AppPage {
     this.inputs = Object.keys(fakeUser).reduce(
       (inputs, fieldName) => ({
         ...inputs,
-        [fieldName]: page.getByLabel(camelCaseIdentifierToWords(fieldName))
+        [fieldName]: page.getByPlaceholder(camelCaseIdentifierToWords(fieldName))
       }),
       {} as Record<keyof User, Locator>
     );
@@ -43,12 +43,8 @@ export default class AppPage {
     });
   }
 
-  async expectUserRegistrationFormToShowErrors() {
-    await forEachAsync(Object.keys(this.inputs), async (fieldName) => {
-      const inputErrorMsgPrefix = camelCaseIdentifierToWords(fieldName);
-      const errorText = this.page.getByText(`${inputErrorMsgPrefix} is required`);
-      await expect(errorText).toBeVisible();
-    });
+  getValidationErrorMsgs() {
+    return this.page.locator('span[aria-label="exclamation-circle"]');
   }
 
   getRegistrationErrorMsg() {

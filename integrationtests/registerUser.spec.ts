@@ -26,7 +26,7 @@ test.describe('User registration', () => {
     await appPage.registerButton.click();
 
     // THEN
-    await appPage.expectUserRegistrationFormToShowErrors();
+    await expect(appPage.getValidationErrorMsgs()).toHaveCount(7);
     await expect(appPage.registeredUserListItem).toBeHidden();
   });
 
@@ -41,7 +41,7 @@ test.describe('User registration', () => {
     await appPage.registerButton.click();
 
     // THEN
-    await expect(appPage.getInvalidEmailErrorMsg()).toBeVisible();
+    await expect(appPage.getValidationErrorMsgs()).toHaveCount(1);
     await expect(appPage.registeredUserListItem).toBeHidden();
   });
 
